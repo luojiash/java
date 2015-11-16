@@ -1,4 +1,4 @@
-package com.woqu.ugc;
+package com.github.luojiash;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
