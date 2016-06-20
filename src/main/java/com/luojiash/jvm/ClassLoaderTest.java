@@ -1,4 +1,4 @@
-package test;
+package com.luojiash.jvm;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -25,7 +25,7 @@ public class ClassLoaderTest {
 				}
 			}
 		};
-		Object obj = myLoader.loadClass("ClassLoaderTest").newInstance();
+		Object obj = myLoader.loadClass("com.luojiash.jvm.ClassLoaderTest").newInstance();
 		System.out.println(obj.getClass());
 		System.out.println(obj instanceof ClassLoaderTest);
 	}
