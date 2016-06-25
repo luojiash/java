@@ -4,7 +4,9 @@ import java.io.InputStream;
 
 /**
  * 《深入理解Java虚拟机》p228
- * 类加载器
+ * 实现自定义类加载器时，通常覆盖findClass方法，
+ * 当父加载器不能加载指定类时，才由当前加载器加载，
+ * 这种做法遵循双亲委派机制，当然这不是强制的。
  */
 public class ClassLoaderTest {
 	public static void main(String[] args) throws Exception {
