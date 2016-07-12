@@ -1,5 +1,6 @@
 package com.luojiash.util;
 
+import java.io.ByteArrayOutputStream;
 import java.security.GeneralSecurityException;
 import java.security.KeyFactory;
 import java.security.KeyPair;
@@ -74,17 +75,50 @@ public class RSAUtil {
 	    signature.update(text.getBytes());
 	    return signature.verify(Base64.decodeBase64(sign));
 	}
-	
+
+	public static String longTextEncode(String text, PrivateKey privateKey) throws Exception {
+	    byte[] bytes=text.getBytes();
+        int len=117;
+        ByteArrayOutputStream baos=new ByteArrayOutputStream();
+        for (int i = 0; i < bytes.length; i+=len) {
+            baos.write(encrypt(privateKey, Arrays.copyOfRange(bytes, i, i+Integer.min(len, bytes.length-i))));
+        }
+        byte[] enBytes = baos.toByteArray();
+        return Base64.encodeBase64String(enBytes);
+	}
+
+	public static String longTextDecode(String text, PublicKey publicKey) throws Exception {
+	    byte[] enBytes=Base64.decodeBase64(text);
+	    int decLen=128;
+	    ByteArrayOutputStream baos=new ByteArrayOutputStream();
+        for (int i = 0; i < enBytes.length; i+=decLen) {
+            baos.write(decrypt(publicKey, Arrays.copyOfRange(enBytes, i, i+Integer.min(decLen, enBytes.length-i))));
+        }
+        return new String(baos.toByteArray());
+    }
+
 	public static void main(String[] args) throws Exception {
 		KeyPairGenerator generator = KeyPairGenerator.getInstance(RSA);
 //		generator.initialize(keysize, random);
 		KeyPair pair = generator.generateKeyPair();
 		PrivateKey privateKey = pair.getPrivate();
+		PublicKey publicKey = pair.getPublic();
 		
 		String text = "a是谁佛isabcd你是谁佛is";
 		byte[] enBytes =encrypt(privateKey, text.getBytes());
 		System.out.println(Base64.encodeBase64String(enBytes));
+	    System.out.println(new String(decrypt(pair.getPublic(), enBytes)));
 		
+		/* 长文本加密。为了提高速度，可以采用另一种加密方式：
+		 * 长文本使用对称加密算法加密，把对称密钥使用非对称算法加密，
+		 * 将加密的长文本和加密的对称密钥一起发送。
+		 */
+		String encoded = longTextEncode(text, privateKey);
+		String decoded = longTextDecode(encoded, publicKey);
+		System.out.println(encoded);
+		System.out.println(decoded);
+
+		// 签名生成和验证
 		String sign = sign(text, privateKey);
 		System.out.println(sign);
 		System.out.println(verifySign(text, sign, pair.getPublic()));

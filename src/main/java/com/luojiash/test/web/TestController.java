@@ -14,7 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.luojiash.util.HttpUtils;
 
 @Controller
 public class TestController {
@@ -82,5 +86,21 @@ public class TestController {
         ServletOutputStream sos = response.getOutputStream();
         ImageIO.write(buffImg, "jpeg", sos);
         sos.close();
+    }
+
+    @RequestMapping("abc")
+    public @ResponseBody String ip(HttpServletRequest request,HttpServletResponse response) {
+        return HttpUtils.getIp(request);
+    }
+
+    @RequestMapping("param")
+    public @ResponseBody String param(HttpServletRequest request,HttpServletResponse response,@RequestBody String data) {
+        try {
+            System.out.println(data);
+            return HttpUtils.getPostData(request);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "error";
+        }
     }
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+		<setting name="cacheEnabled" value="true" />
+		<!-- changes from the defaults -->
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="multipleResultSetsEnabled" value="true" />
+		<setting name="useColumnLabel" value="true" />
+		<setting name="useGeneratedKeys" value="false" />
+		<setting name="autoMappingBehavior" value="PARTIAL" />
+		<setting name="defaultExecutorType" value="SIMPLE" />
+		<setting name="defaultStatementTimeout" value="25000" />
+		<setting name="safeRowBoundsEnabled" value="false" />
+		<setting name="mapUnderscoreToCamelCase" value="false" />
+		<setting name="localCacheScope" value="SESSION" />
+		<!-- JdbcType enumeration. Most common are: NULL, VARCHAR and OTHER -->
+		<setting name="jdbcTypeForNull" value="OTHER" />
+		<setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString" />
+	</settings>
+	<!-- typeAliases是为了减少类名的长度来设置的。这些的基础是只能够在配置文件中使用 -->
+	<typeAliases>
+		<!-- <typeAlias type="com.gongfutrip.bean.intair.RuleInfo" alias="RuleInfo"/>
+		<typeAlias type="com.gongfutrip.bean.intair.RuleField" alias="RuleField"/>
+		<typeAlias type="com.gongfutrip.bean.intair.RuleDictionary" alias="RuleDictionary"/>
+		<typeAlias type="com.gongfutrip.service.api.core.model.RuleLang" alias="RuleLang"/>
+		<typeAlias type="com.gongfutrip.service.api.core.model.RuleDic" alias="RuleDic"/> -->
+	</typeAliases>
+</configuration>
