@@ -1,7 +1,5 @@
 package com.luojiash.test.service;
 
-import java.io.FileNotFoundException;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,7 @@ public class StudentServiceTest {
     public void test() {
         try {
             studentService.test();
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
