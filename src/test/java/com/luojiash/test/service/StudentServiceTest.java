@@ -11,6 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class StudentServiceTest {
     @Autowired
     private StudentService studentService;
+    @Autowired
+    private AspectTestService aspectTestService;
 
     @Test
     public void test() {
@@ -19,5 +21,10 @@ public class StudentServiceTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void t() {
+        aspectTestService.t();
     }
 }

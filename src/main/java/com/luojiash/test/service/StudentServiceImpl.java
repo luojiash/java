@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.luojiash.test.annotation.LogAn;
 import com.luojiash.test.dao.StudentDAO;
 import com.luojiash.test.dto.Student;
 
@@ -20,16 +21,22 @@ import com.luojiash.test.dto.Student;
 public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentDAO studentDAO;
-    
+
     @Transactional(propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
     public void test() throws IOException {
         Student student = new Student();
         student.setName("jjj");
         student.setAge(33);
-        
+
         studentDAO.insertStudent(student);
 //        new BigDecimal("sss");
         new FileInputStream("c:/abc.pl").close();
         studentDAO.insertStudent(student);
+    }
+
+    @LogAn
+    public String tLog() {
+        System.out.println("doing");
+        return "testLog";
     }
 }
