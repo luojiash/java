@@ -21,6 +21,7 @@ public class LogAspect {
     @Before(value = "@annotation(logAn)")
     public void b(JoinPoint joinPoint, LogAn logAn) {
         System.out.println(logAn);
+        System.out.println(joinPoint.getTarget().getClass().getSimpleName()+"#"+joinPoint.getSignature().getName());
 
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();

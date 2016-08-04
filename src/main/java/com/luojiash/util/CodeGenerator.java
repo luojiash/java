@@ -1,4 +1,4 @@
-package com.github.luojiash;
+package com.luojiash.util;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
