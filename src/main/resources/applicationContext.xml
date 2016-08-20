@@ -17,4 +17,6 @@
 
 	<import resource="applicationContext-dao.xml" />
 
+	<bean class="com.luojiash.test.service.StudentServiceImpl"/>
+	<bean class="com.luojiash.spring.listener.SpListener"/>
 </beans>

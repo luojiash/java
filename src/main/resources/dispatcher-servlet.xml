@@ -10,6 +10,11 @@
 
 	<mvc:annotation-driven />
 
+	<bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="providerClass" value="org.apache.bval.jsr.ApacheValidationProvider" />
+	</bean>
+
 	<context:component-scan base-package="com.luojiash" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>

@@ -2,8 +2,11 @@ package com.luojiash.test.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 public class Student {
     private long id;
+    @NotNull
     private String name;
     private int age;
     private Date createTime;
