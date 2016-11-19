@@ -27,7 +27,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.luojiash.util.HttpUtils;
@@ -47,7 +49,7 @@ public class FileUploadController {
 	
 	private final String IMG_PATH="c:\\file\\";
 	
-	@RequestMapping("file/upload")
+	/*@RequestMapping("file/upload")
 	@ResponseBody
 	public String upload(HttpServletRequest request,HttpServletResponse response) {
 	    DiskFileItemFactory factory=new DiskFileItemFactory();
@@ -62,13 +64,13 @@ public class FileUploadController {
                     item.write(file);
                     return file.getPath();
                     //直接返回图片，不保存
-                    /*InputStream inputStream=item.getInputStream();
+                    InputStream inputStream=item.getInputStream();
                     OutputStream outputStream=response.getOutputStream();
                     byte []temp=new byte[1024];
                     int n=-1;
                     while ((n=inputStream.read(temp))!=-1) {
                         outputStream.write(temp, 0, n);
-                    }*/
+                    }
                 }
             }
         } catch (FileUploadException e) {
@@ -79,8 +81,20 @@ public class FileUploadController {
             e.printStackTrace();
         }
 	    return "";
-	}
-	
+	}*/
+
+    @RequestMapping(value = "file/upload", produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public String upload(@RequestParam("upload") MultipartFile file) {
+        try {
+            file.transferTo(new File(IMG_PATH + file.getOriginalFilename()));
+            return file.getOriginalFilename();
+        } catch (IllegalStateException | IOException e) {
+            e.printStackTrace();
+            return "fail";
+        }
+    }
+
 	@RequestMapping("file")
     @ResponseBody
     public void upload(HttpServletRequest request,HttpServletResponse response,String path) {
