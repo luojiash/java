@@ -6,6 +6,9 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
+	<context:property-placeholder location="classpath:conf.properties" />
+	<!-- <context:property-placeholder location="file:///e|/www/logs/conf.properties" file-encoding="utf-8"/> -->
+
 	<aop:aspectj-autoproxy />
 
 	<context:annotation-config />
@@ -15,6 +18,7 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 
+	<import resource="applicationContext-service.xml" />
 	<import resource="applicationContext-dao.xml" />
 
 	<bean class="com.luojiash.test.service.StudentServiceImpl"/>
