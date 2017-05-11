@@ -1,10 +1,11 @@
 package com.luojiash.test.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
-public class Student {
+public class Student implements Serializable {
     private long id;
     @NotNull
     private String name;

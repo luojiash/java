@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luojiash.test.dao.StudentDAO">
+    <!--useCache 将其设置为 true，将会导致本条语句的结果被二级缓存，默认值：对 select 元素为 true。-->
+    <select id="getStudent" resultType="com.luojiash.test.dto.Student" useCache="false">
+        SELECT * FROM student  WHERE id = #{id}
+    </select>
+
+    <select id="getStudentWithCache" resultType="com.luojiash.test.dto.Student">
+        SELECT * FROM student  WHERE id = #{id}
+    </select>
+
+    <cache/>
+</mapper>
